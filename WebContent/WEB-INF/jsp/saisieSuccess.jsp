@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ma première page Spring !
+
+Votre compte a été bien enregistrée !
+<br>
+Vérifiez vos informations
+<br>
+Nom: ${compte.nom }
+<br>
+Prénom: ${ compte.prenom}
+<br>
+Age: ${ compte.age}
+<br>
+
 </body>
 </html>

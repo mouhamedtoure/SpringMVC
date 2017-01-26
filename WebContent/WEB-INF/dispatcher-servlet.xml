@@ -14,9 +14,16 @@
 	<mvc:annotation-driven />
 
 	<context:component-scan base-package="fr.demos.formation.controller"></context:component-scan>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basename" value="resources.messages"></property>
+	
+	</bean>
+	 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
 </beans>
