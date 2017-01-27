@@ -18,6 +18,8 @@ Prénom: ${ compte.prenom}
 <br>
 Age: ${ compte.age}
 <br>
+Email: ${compte.email }
+<br>
 
 </body>
 </html>
