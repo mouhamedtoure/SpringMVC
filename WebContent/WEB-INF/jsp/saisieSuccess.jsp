@@ -12,11 +12,11 @@ Votre compte a été bien enregistrée !
 <br>
 Vérifiez vos informations
 <br>
-Nom: ${compte.nom }
+Nom: ${compte.nom}
 <br>
 Prénom: ${ compte.prenom}
 <br>
-Age: ${ compte.age}
+Annee de Naissance: ${ compte.anneeDeNaissance}
 <br>
 Email: ${compte.email }
 <br>

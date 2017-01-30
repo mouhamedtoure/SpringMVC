@@ -55,7 +55,7 @@ public class CompteController {
 
 		System.out.println("le nom:" + compte.getNom());
 		System.out.println("le prenom:" + compte.getPrenom());
-		System.out.println("l'age:" + compte.getAge());
+		System.out.println("l'annee de naissance:" + compte.getAnneeDeNaissance());
 		System.out.println("l'email:" + compte.getEmail());
 
 		if (result.hasErrors()) {
