@@ -14,7 +14,7 @@ public class Compte {
 	private String prenom;
 	
     @DateTimeFormat(pattern = "dd/MM/yyyy") 
-	private LocalDate anneeDeNaissance;
+	private LocalDate dateNaissance;
 	
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
@@ -43,8 +43,12 @@ public class Compte {
 		this.email = email;
 	}
 
-	public LocalDate getAnneeDeNaissance() {
-		return anneeDeNaissance;
+	public LocalDate getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(LocalDate dateNaissance) {
+		this.dateNaissance = dateNaissance;
 	}
 
 }

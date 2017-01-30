@@ -22,11 +22,16 @@ import fr.demos.formation.model.Compte;
 @SessionAttributes("compte")
 public class CompteController {
 
+ 
+
+	
 	@Autowired
 	private LocaleResolver sessionLocaleResolver;
 
 	@RequestMapping(value = "/saisieCompte.htm", method = RequestMethod.GET)
 	public String affichePage(ModelMap model) {
+		
+	
 
 		model.addAttribute("compte", new Compte());
 		return "saisieCompte";
@@ -44,8 +49,11 @@ public class CompteController {
 	@RequestMapping(value = "/french.htm", method = RequestMethod.GET)
 	public String french(HttpServletRequest request, HttpServletResponse response) {
 
+	
+		
 		sessionLocaleResolver.setLocale(request, response, Locale.FRENCH);
 		return "saisieCompte";
+		
 
 	}
 
@@ -55,7 +63,7 @@ public class CompteController {
 
 		System.out.println("le nom:" + compte.getNom());
 		System.out.println("le prenom:" + compte.getPrenom());
-		System.out.println("l'annee de naissance:" + compte.getAnneeDeNaissance());
+		System.out.println("la date de naissance:" + compte.getDateNaissance());
 		System.out.println("l'email:" + compte.getEmail());
 
 		if (result.hasErrors()) {

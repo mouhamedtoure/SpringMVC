@@ -16,7 +16,7 @@ Nom: ${compte.nom}
 <br>
 Prénom: ${ compte.prenom}
 <br>
-Annee de Naissance: ${ compte.anneeDeNaissance}
+Date de Naissance: ${compte.dateNaissance}
 <br>
 Email: ${compte.email }
 <br>

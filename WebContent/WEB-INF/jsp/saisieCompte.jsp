@@ -31,9 +31,9 @@
 
 			</tr>
 			<tr>
-				<td><form:label path="anneeDeNaissance" /><spring:message code="label.anneeDeNaissance" /></td>
-				<td><form:input path="anneeDeNaissance" /></td>
-				<td><form:errors path="anneeDeNaissance" /></td>
+				<td><form:label path="dateNaissance" /><spring:message code="label.dateNaissance" /></td>
+				<td><form:input path="dateNaissance" /></td>
+				<td><form:errors path="dateNaissance" /></td>
 
 			</tr>
 

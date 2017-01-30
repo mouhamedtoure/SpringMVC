@@ -11,19 +11,35 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<mvc:annotation-driven/>
-
-	<context:component-scan base-package="fr.demos.formation.controller, fr.demos.formation.model"></context:component-scan>
+	<mvc:annotation-driven />
 	
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-	<property name="basename" value="resources.messages"></property>
 	
+	<bean id="compteDAO" class="fr.demos.formation.data.CompteDAOMySQL">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/SpringMVC" />
+		<property name="username" value="SpringMVCDBA" />
+		<property name="password" value="NAnette3036" />
+	</bean>
+
+	<context:component-scan
+		base-package="fr.demos.formation.controller, fr.demos.formation.model, fr.demos.formation.data"></context:component-scan>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="resources.messages"></property>
+
+	</bean>
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
+
 </beans>
