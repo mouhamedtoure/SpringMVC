@@ -31,7 +31,7 @@
                	maxActive="100" 
                	maxIdle="30" 
                	maxWaitMillis="10000"
-               	username="SringMVCDBA" 
+               	username="SpringMVCDBA" 
                	password="NAnette3036" 
                	driverClassName="com.mysql.jdbc.Driver"
                	url="jdbc:mysql://localhost:3306/SpringMVC"/>

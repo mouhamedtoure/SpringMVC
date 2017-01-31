@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,14 +17,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.LocaleResolver;
 
+import fr.demos.formation.data.CompteDAO;
 import fr.demos.formation.model.Compte;
 
 @Controller
 @SessionAttributes("compte")
 public class CompteController {
 
- 
+	@Autowired 
+	private CompteDAO comptedao;
+	
+	public CompteDAO getComptedao() {
+		return comptedao;
+	}
 
+	public void setComptedao(CompteDAO comptedao) {
+		this.comptedao = comptedao;
+	}
 	
 	@Autowired
 	private LocaleResolver sessionLocaleResolver;
@@ -56,6 +66,16 @@ public class CompteController {
 		
 
 	}
+	
+	@RequestMapping(value ="/afficheCompte.htm", method = RequestMethod.GET)
+	public String afficheCompte(ModelMap model) {
+
+	
+		model.addAttribute("mesComptes", comptedao.select());
+		return "afficheCompte";
+		
+
+	}
 
 	@RequestMapping(value = "/enregistrerCompte.htm", method = RequestMethod.POST)
 	public String enregistrerCompte(@ModelAttribute("compte") @Valid Compte compte, BindingResult result,
@@ -65,14 +85,26 @@ public class CompteController {
 		System.out.println("le prenom:" + compte.getPrenom());
 		System.out.println("la date de naissance:" + compte.getDateNaissance());
 		System.out.println("l'email:" + compte.getEmail());
+		
+		
+		try {
+			
+				comptedao.insert(compte);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
 
 		if (result.hasErrors()) {
 
 			return "saisieCompte";
 
 		} else {
-
-			return "saisieSuccess";
+				
+				return "afficheCompte";
 		}
 
 	}

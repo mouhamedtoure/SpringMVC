@@ -9,6 +9,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Compte {
 
+	public Compte() {
+		super();
+	}
+
+	public Compte(String nom, String prenom, LocalDate dateNaissance, String email) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.email = email;
+	}
+
 	@Size(min = 2, max = 10)
 	private String nom;
 	private String prenom;
