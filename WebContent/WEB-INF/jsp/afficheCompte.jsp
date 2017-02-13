@@ -10,21 +10,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Affichage des comptes</title>
 </head>
+<h1>Liste des Comptes</h1>
 <body>
-	<table>
+	<table cellspacing="5" cellpadding="10">
+
+		<tr align="left">
+			<th>Nom</th>
+
+			<th>Prenom</th>
+
+			<th>Date de naissance</th>
+
+			<th>Email</th>
+
+		</tr>
+
 		<c:forEach items="${mesComptes}" var="compte">
-			<tr>
+			<tr align="left">
 
 
 				<td>${compte.nom}</td>
 
-				
+
 				<td>${compte.prenom}</td>
 
 
 				<td>${compte.dateNaissance}</td>
-				
-				
+
+
 				<td>${compte.email}</td>
 
 			</tr>
