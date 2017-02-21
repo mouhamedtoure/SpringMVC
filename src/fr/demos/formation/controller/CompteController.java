@@ -88,7 +88,7 @@ public class CompteController {
 		
 		try {
 			
-				comptedao.insertTemplate(compte);
+				comptedao.insert(compte);
 			
 		} catch (Exception e) {
 			

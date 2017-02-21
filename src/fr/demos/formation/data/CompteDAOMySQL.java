@@ -13,14 +13,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.demos.formation.model.Compte;
 
 // Mon CompteDAOMySQL devient un bean
 
-@Repository
+
 public class CompteDAOMySQL implements CompteDAO {
 
 	// Besoin d'un datasource
@@ -29,8 +28,6 @@ public class CompteDAOMySQL implements CompteDAO {
 	// On prepare le Datasource qui n'est pas un bean mais une ressource geree
 	// par le serveur
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
 	@Resource()
 	private DataSource dataSource;
@@ -63,14 +60,8 @@ public class CompteDAOMySQL implements CompteDAO {
 
 	}
 
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
+	
+	
 	@Transactional
 	@Override
 	public List<Compte> select() {
@@ -105,18 +96,4 @@ public class CompteDAOMySQL implements CompteDAO {
 
 	}
 
-	@Override
-	public void insertTemplate(Compte compte) throws Exception {
-		
-		jdbcTemplate.update(
-				"INSERT INTO  compte(nom, prenom, dateNaissance, email) VALUES (?,?,?,?)",
-				new Object[]{compte.getNom(),compte.getPrenom(),java.sql.Date.valueOf(compte.getDateNaissance()),compte.getEmail()
-				});
-		
-		jdbcTemplate.update(
-				"INSERT INTO  compte(nom, prenom, dateNaissance, email) VALUES (?,?,?,?)",
-				new Object[]{compte.getNom(),compte.getPrenom(),java.sql.Date.valueOf(compte.getDateNaissance()),compte.getEmail()
-				});
-			
-	}
 }

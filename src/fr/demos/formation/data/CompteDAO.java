@@ -14,8 +14,5 @@ public interface CompteDAO {
 	void insert(Compte compte) throws Exception;
 	
 	@Transactional
-	void insertTemplate(Compte compte) throws Exception;
-	
-	@Transactional
 	List <Compte> select();
 }
