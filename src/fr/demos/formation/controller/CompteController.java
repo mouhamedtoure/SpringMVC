@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -23,9 +24,9 @@ import fr.demos.formation.model.Compte;
 @SessionAttributes("compte")
 public class CompteController {
 
-	@Autowired 
+	@Autowired
 	private CompteDAO comptedao;
-	
+
 	public CompteDAO getComptedao() {
 		return comptedao;
 	}
@@ -33,20 +34,35 @@ public class CompteController {
 	public void setComptedao(CompteDAO comptedao) {
 		this.comptedao = comptedao;
 	}
-	
+
 	@Autowired
 	private LocaleResolver sessionLocaleResolver;
 
 	@RequestMapping(value = "/saisieCompte.htm", method = RequestMethod.GET)
 	public String affichePage(ModelMap model) {
-		
-	
 
 		model.addAttribute("compte", new Compte());
 		return "saisieCompte";
 
 	}
-
+	
+	@RequestMapping(value="/rechercherCompteParId.htm", method = RequestMethod.POST)
+	public String rechercheCompte(ModelMap model, @RequestParam(name="email") String email){
+		
+		// appel du find dans dao
+		
+		Compte compte = comptedao.find(email);
+		// récup du compte, on le stocke dans le model
+		if(compte!=null){
+			model.addAttribute("compte", compte);
+		}
+		else {
+			model.addAttribute("compte", new Compte());
+		}
+		return "saisieCompte";
+	}
+	
+	
 	@RequestMapping(value = "/english.htm", method = RequestMethod.GET)
 	public String english(HttpServletRequest request, HttpServletResponse response) {
 
@@ -58,21 +74,16 @@ public class CompteController {
 	@RequestMapping(value = "/french.htm", method = RequestMethod.GET)
 	public String french(HttpServletRequest request, HttpServletResponse response) {
 
-	
-		
 		sessionLocaleResolver.setLocale(request, response, Locale.FRENCH);
 		return "saisieCompte";
-		
 
 	}
-	
-	@RequestMapping(value ="/afficheCompte.htm", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/afficheCompte.htm", method = RequestMethod.GET)
 	public String afficheCompte(ModelMap model) {
 
-	
 		model.addAttribute("mesComptes", comptedao.select());
 		return "afficheCompte";
-		
 
 	}
 
@@ -84,26 +95,23 @@ public class CompteController {
 		System.out.println("le prenom:" + compte.getPrenom());
 		System.out.println("la date de naissance:" + compte.getDateNaissance());
 		System.out.println("l'email:" + compte.getEmail());
-		
-		
+
 		try {
-			
-				comptedao.insert(compte);
-			
+
+			comptedao.insert(compte);
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		
-	
 
 		if (result.hasErrors()) {
 
 			return "saisieCompte";
 
 		} else {
-				
-				return "saisieSuccess";
+
+			return "saisieSuccess";
 		}
 
 	}

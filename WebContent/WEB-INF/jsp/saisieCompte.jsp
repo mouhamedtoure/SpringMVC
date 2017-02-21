@@ -13,10 +13,17 @@
 <body>
 	<h1>
 		<spring:message code="label.heading" />
+
 	</h1>
 
+	<a href="afficheCompte.htm"> <spring:message code="label.href" />
+	</a>
+	<br>
+	<br>
 	<form:form modelAttribute="compte" action="enregistrerCompte.htm"
 		method="post">
+
+
 		<table>
 			<tr>
 				<td><form:label path="nom" /> <spring:message code="label.nom" /></td>
@@ -55,10 +62,15 @@
 					</form:button></td>
 			</tr>
 		</table>
-
 		<a href="english.htm"> English</a> | <a href="french.htm"> French</a>
-	</form:form>
-
-
+		</form:form>
+		<br>
+		<form action="rechercherCompteParId.htm" method="post">
+			<label>email</label>
+			<input name="email" />
+			<input type= "submit" name="rechercher" value="Rechercher" /> 
+		
+			
+		</form>
 </body>
 </html>

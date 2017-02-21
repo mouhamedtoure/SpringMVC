@@ -10,18 +10,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Affichage des comptes</title>
 </head>
-<h1>Liste des Comptes</h1>
+<h1>
+	<spring:message code="label.heading1" />
+</h1>
 <body>
 	<table cellspacing="5" cellpadding="10">
 
 		<tr align="left">
-			<th>Nom</th>
+			<th><spring:message code="label.nom" /></th>
 
-			<th>Prenom</th>
+			<th><spring:message code="label.prenom" /></th>
 
-			<th>Date de naissance</th>
+			<th><spring:message code="label.dateNaissance" /></th>
 
-			<th>Email</th>
+			<th><spring:message code="label.email" /></th>
 
 		</tr>
 
