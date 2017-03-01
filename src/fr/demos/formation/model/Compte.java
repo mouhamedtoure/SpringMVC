@@ -1,14 +1,20 @@
 package fr.demos.formation.model;
 
-
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,6 +32,10 @@ public class Compte {
 	@Id
 	private String email;
 
+	@JoinColumn(name = "compte_id")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Adresse> listeAdresses;
+
 	public Compte() {
 		super();
 	}
@@ -36,6 +46,15 @@ public class Compte {
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
 		this.email = email;
+	}
+
+	public Compte(String nom, String prenom, LocalDate dateNaissance, String email, List<Adresse> listeAdresses) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.email = email;
+		this.listeAdresses = listeAdresses;
 	}
 
 	public String getNom() {
@@ -68,6 +87,14 @@ public class Compte {
 
 	public void setDateNaissance(LocalDate dateNaissance) {
 		this.dateNaissance = dateNaissance;
+	}
+
+	public List<Adresse> getListeAdresses() {
+		return listeAdresses;
+	}
+
+	public void setListeAdresses(List<Adresse> listeAdresses) {
+		this.listeAdresses = listeAdresses;
 	}
 
 }

@@ -25,6 +25,8 @@
 
 			<th><spring:message code="label.email" /></th>
 
+			<th><spring:message code="label.listeAdresses" /></th>
+
 		</tr>
 
 		<c:forEach items="${mesComptes}" var="compte">
@@ -42,6 +44,12 @@
 
 				<td>${compte.email}</td>
 
+
+				<td><c:forEach items="${compte.listeAdresses}" var="adresse">
+				<c:if test="${ not empty adresse}"> ${adresse}  <br>	
+				</c:if>
+				</c:forEach>
+				<td>
 			</tr>
 
 
