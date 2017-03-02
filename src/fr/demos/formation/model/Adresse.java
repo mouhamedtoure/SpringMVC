@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Adresse {
@@ -12,6 +13,7 @@ public class Adresse {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String type;
+	@Min(0)
 	private int numero;
 	private String libelleVoie;
 	private int codePostal;

@@ -20,7 +20,7 @@
 	</a>
 	<br>
 	<br>
-	<form:form modelAttribute="compte" action="enregistrerCompte.htm"
+	<form:form modelAttribute="compte" action="affichePageAdresse.htm"
 		method="post">
 
 

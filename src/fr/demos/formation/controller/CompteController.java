@@ -23,6 +23,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import fr.demos.formation.data.CompteDAO;
 import fr.demos.formation.model.Adresse;
 import fr.demos.formation.model.Compte;
+import fr.demos.formation.model.ComptePremium;
 
 @Controller
 @SessionAttributes("compte")
@@ -49,24 +50,22 @@ public class CompteController {
 		return "saisieCompte";
 
 	}
-	
-	@RequestMapping(value="/rechercherCompteParId.htm", method = RequestMethod.POST)
-	public String rechercheCompte(ModelMap model, @RequestParam(name="email") String email){
-		
+
+	@RequestMapping(value = "/rechercherCompteParId.htm", method = RequestMethod.POST)
+	public String rechercheCompte(ModelMap model, @RequestParam(name = "email") String email) {
+
 		// appel du find dans dao
-		
+
 		Compte compte = comptedao.find(email);
 		// récup du compte, on le stocke dans le model
-		if(compte!=null){
+		if (compte != null) {
 			model.addAttribute("compte", compte);
-		}
-		else {
+		} else {
 			model.addAttribute("compte", new Compte());
 		}
 		return "saisieCompte";
 	}
-	
-	
+
 	@RequestMapping(value = "/english.htm", method = RequestMethod.GET)
 	public String english(HttpServletRequest request, HttpServletResponse response) {
 
@@ -74,31 +73,58 @@ public class CompteController {
 		return "saisieCompte";
 
 	}
-	
-	@RequestMapping(value="/essaiHibernate.htm", method= RequestMethod.GET)
-	public String essaiHibernate(ModelMap model){
-		
-		
-		
+
+	@RequestMapping(value = "/essaiHibernate.htm", method = RequestMethod.GET)
+	public String essaiHibernate(ModelMap model) {
+
 		Adresse a1 = new Adresse("Adresse de facturation", 22, "Rue de la Paix", 75000, "Paris");
-		
+
 		Adresse a2 = new Adresse("Adresse de livraison", 31, "Rue des Maronniers", 75012, "Paris");
-		
-		List<Adresse> lad= new ArrayList<Adresse>();
+
+		List<Adresse> lad = new ArrayList<Adresse>();
 		lad.add(a1);
 		lad.add(a2);
-		
-		Compte compte1 = new Compte("Toto", "Titi", LocalDate.of(2012,12,12), "toto.titi@hotmail.com", lad); 
-		
-		
+
+		Compte compte1 = new Compte("Toto", "Titi", LocalDate.of(2012, 12, 12), "toto.titi@hotmail.com", lad);
+
 		try {
 			comptedao.insert(compte1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "essaiHibernate";
+	}
+
+	@RequestMapping(value = "/essaiHeritage.htm", method = RequestMethod.GET)
+	public String essaiHeritage(ModelMap model) {
+
+		Adresse a1 = new Adresse("Adresse de facturation", 22, "Rue de la Paix", 75000, "Paris");
+
+		Adresse a2 = new Adresse("Adresse de livraison", 31, "Rue des Maronniers", 75012, "Paris");
+
+		List<Adresse> lad = new ArrayList<Adresse>();
+		lad.add(a1);
+		lad.add(a2);
+
+		Compte compte1 = new Compte("Allo", "ici", LocalDate.of(2012, 12, 12), "ici.allo@hotmail.com", lad);
+
+		List<Compte> lstf = new ArrayList<Compte>();
+
+		lstf.add(compte1);
+
+		ComptePremium cp = new ComptePremium("Hassel", "David", LocalDate.of(2007, 10, 03), "david.hassel@hotmail.com",
+				lad, 10, 10, LocalDate.of(2016, 03, 12), lstf);
+
+		try {
+			comptedao.insert(cp);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "essaiHeritage";
 	}
 
 	@RequestMapping(value = "/french.htm", method = RequestMethod.GET)
@@ -121,10 +147,6 @@ public class CompteController {
 	public String enregistrerCompte(@ModelAttribute("compte") @Valid Compte compte, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("le nom:" + compte.getNom());
-		System.out.println("le prenom:" + compte.getPrenom());
-		System.out.println("la date de naissance:" + compte.getDateNaissance());
-		System.out.println("l'email:" + compte.getEmail());
 
 		try {
 
@@ -142,6 +164,40 @@ public class CompteController {
 		} else {
 
 			return "saisieSuccess";
+		}
+
+	}
+	
+	
+
+	@RequestMapping(value = "/affichePageAdresse.htm", method = RequestMethod.POST)
+	public String affichePageAdresse(ModelMap model) {
+
+		model.addAttribute("adresse", new Adresse());
+		return "affichePageAdresse";
+
+	}
+
+	@RequestMapping(value = "/enregistrerCompteAvecAdresse.htm", method = RequestMethod.POST)
+	public String enregistrerCompteAvecAdresse(@ModelAttribute("compte") @Valid Compte compte, BindingResult result,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			comptedao.insert(compte);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		if (result.hasErrors()) {
+
+			return "saisieCompte";
+
+		} else {
+
+			return "saisieAdresse";
 		}
 
 	}

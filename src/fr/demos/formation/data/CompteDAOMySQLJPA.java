@@ -3,7 +3,10 @@ package fr.demos.formation.data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -14,14 +17,20 @@ import fr.demos.formation.model.Adresse;
 import fr.demos.formation.model.Compte;
 
 @Repository
+
 public class CompteDAOMySQLJPA implements CompteDAO {
 
 	// Le contexte de persistance utilisé dans l'injection est par défaut
 	// transactionnel
 	// l'entity manager manipule un contexte transactionnel
 
+//	@PersistenceUnit
+//	private EntityManagerFactory emf;
+
 	@PersistenceContext
-	private EntityManager em;
+	private EntityManager em ;
+	
+	//= emf.createEntityManager();;
 
 	// Annotation @Transactional gère la transaction par AOP
 	@Override

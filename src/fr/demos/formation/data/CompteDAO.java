@@ -16,5 +16,6 @@ public interface CompteDAO {
 	@Transactional
 	List <Compte> select();
 	
+	
 	Compte find(String email);
 }
